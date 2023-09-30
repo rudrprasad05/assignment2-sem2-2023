@@ -43,26 +43,31 @@ void print_successful_applicants(string type){
 
 void remove_unwated_applicants(){
 
-    Node *pHead = myList.getpHead();
-    Node *pNode = pHead;
-
+    
     if (myList.isEmpty())
         cout << "The list is empty\n";
-    else
+    else{
+        Node *pHead = myList.getpHead();
+        Node *pNode = pHead;
+        Node *temp = pNode;
+
         for (pNode = pHead; pNode != NULL; pNode = myList.nextNode(pNode)){
             
             Data *d = pNode->getData();
+            
             VisaApplication *v = dynamic_cast<VisaApplication*>(d);
             
-
             if(v->result == "success" || v->result == "failure"){
-                cout << "K";
+                myList.removeNode(pNode);
+                pNode = temp;
+
             }
             else{
                 continue;
             }
         }
-    // myList.printList();
+    }
+    myList.printList();
 
 }
 
@@ -104,7 +109,7 @@ int main()
 
     }
 
-    myList.printList();
+    // myList.printList();
     // print_successful_applicants("success");
     // print_successful_applicants("failure");
     remove_unwated_applicants();

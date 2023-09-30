@@ -58,7 +58,7 @@ void List::insertNode(Data* value, Node* pAfter)
 }
 
 void List::removeNode(Node* pNode)
-{
+{   
     if (pNode->pPrev == NULL)  //if removing the head
         pHead = pNode->pNext;
     else
@@ -69,7 +69,7 @@ void List::removeNode(Node* pNode)
     else
         pNode->pNext->pPrev = pNode->pPrev;
 
-    delete pNode;  //*free the memory
+    delete pNode; //*free the memory
 }
 
 void List::printList()

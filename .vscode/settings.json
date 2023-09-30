@@ -3,6 +3,7 @@
         ".njk": ".html",
         ".js": ".html",
         "*.css": "tailwindcss",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "new": "cpp"
     }
 }
