@@ -1,6 +1,7 @@
 #pragma once
 #include "Data.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -18,13 +19,13 @@ class VisaApplication : public Data{
 
         void print()
         {
-            cout << this->visa_type << " | " 
-            << this->invoice_no << " | " 
-            << this->surname << " | " 
-            << this->first_name << " | "
-            << this->contact << " | "
-            << this->status << " | "
-            << this->result << " | " << endl;
+            cout << setw(8) << this->visa_type << setw(5) << " | " 
+            << setw(3) << this->invoice_no << setw(3) << " | " 
+            << setw(8) << this->surname << setw(5) << " | " 
+            << setw(8) << this->first_name << setw(5) << " | "
+            << setw(5) << this->contact << setw(5) << " | "
+            << setw(3) << this->status << setw(5) << " | "
+            << setw(12) << this->result << " | " << endl;
         }
 
         string getName(){

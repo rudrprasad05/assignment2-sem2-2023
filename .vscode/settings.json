@@ -4,6 +4,7 @@
         ".js": ".html",
         "*.css": "tailwindcss",
         "iosfwd": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "ostream": "cpp"
     }
 }

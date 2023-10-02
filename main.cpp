@@ -9,39 +9,51 @@
 
 using namespace std;
 
-List myList;
-
-
 void discard_line(ifstream& in);
-bool check_white_space(string input1, string input2, string input3, string input4, string input5){
-    if(input1 == "" ){
-        return true;
-    }
-    else return false;
+bool check_white_space(string input1);
+void print_success_failure(string type, List& myList);
+void remove_success_failure(List& myList);
+void read_file(ifstream& in, List& myList);
+
+int main()
+{
+
+    ifstream in;
+    ofstream out;
+
+    List myList;
+
+
+    in.open("applications.txt", ios::in);
+    // out.open("applications_outcome.txt", ios::out);
+
+    read_file(in, myList);
+    cout << "1" << endl;
+    myList.printList();
+
+    cout << "2" << endl;
+    print_success_failure("success", myList);
+
+    cout << "3" << endl;
+    print_success_failure("failure", myList);
+
+    cout << "4" << endl;
+    remove_success_failure(myList);
+    in.close();
+    // out.close();
+    
 }
 
-void print_successful_applicants(string type){
-    Node *pHead = myList.getpHead();
-    Node *pNode = pHead;
-    if (myList.isEmpty())
-        cout << "The list is empty\n";
-    else
-        for (pNode = pHead; pNode != NULL; pNode = myList.nextNode(pNode)){
-            
-            Data *d = pNode->getData();
-            VisaApplication *v = dynamic_cast<VisaApplication*>(d);
-            
+void discard_line(ifstream& in)
+{
+    char c;
 
-            if(v->result == type){
-                v->print();
-            }
-            else{
-                continue;
-            }
-        }
+    do
+        in.get(c);
+    while (c != '\n');
 }
 
-void remove_unwated_applicants(){
+void remove_success_failure(List& myList){
 
     
     if (myList.isEmpty())
@@ -71,19 +83,33 @@ void remove_unwated_applicants(){
 
 }
 
+void print_success_failure(string type, List& myList){
 
-int main()
-{
+    Node *pHead = myList.getpHead();
+    Node *pNode = pHead;
+    if (myList.isEmpty())
+        cout << "The list is empty\n";
+    else
+        for (pNode = pHead; pNode != NULL; pNode = myList.nextNode(pNode)){
+            
+            Data *d = pNode->getData();
+            VisaApplication *v = dynamic_cast<VisaApplication*>(d);
+            
 
-    ifstream in;
-    ofstream out;
+            if(v->result == type){
+                v->print();
+            }
+            else{
+                continue;
+            }
+        }
+}
 
-    in.open("applications.txt", ios::in);
-    // out.open("applications_outcome.txt", ios::out);
+void read_file(ifstream& in, List& myList){
 
     if(in.fail()){
         cout << "invalid file or pathname" << endl;
-        return 0;
+        return;
     }
 
     discard_line(in);
@@ -100,7 +126,7 @@ int main()
         in >> v->status;
         in >> v->result;
 
-        if(check_white_space(v->visa_type, v->invoice_no, v->surname, v->first_name, v->contact)){
+        if(check_white_space(v->visa_type)){
             break;
         }
         
@@ -109,21 +135,14 @@ int main()
 
     }
 
-    // myList.printList();
-    // print_successful_applicants("success");
-    // print_successful_applicants("failure");
-    remove_unwated_applicants();
-    in.close();
-    // out.close();
-    
 }
 
-void discard_line(ifstream& in)
-{
-    char c;
-
-    do
-        in.get(c);
-    while (c != '\n');
+bool check_white_space(string input1){
+    if(input1 == "" ){
+        return true;
+    }
+    else return false;
 }
+
+
 
